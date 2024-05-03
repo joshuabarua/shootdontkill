@@ -3,60 +3,67 @@ import {Document} from 'sanity-io/client';
 export type Movies = [Movie];
 
 export type Movie = {
-	_id: ID;
-	_type: String;
-	_createdAt: DateTime;
-	_updatedAt: DateTime;
-	_rev: String;
-	_key: String;
-	title: String;
+	_id: string;
+	_type: string;
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	_key: string;
+	title: string;
 	slug: Slug;
 	overviewRaw: JSON;
-	releaseDate: DateTime;
+	releaseDate: string;
 	poster: Image;
-	externalId: Float;
-	popularity: Float;
-	castMembers: [CastMember];
-	crewMembers: [CrewMember];
+	externalId: number;
+	popularity: number;
+	castMembers?: [CastMember];
+	crewMembers?: [CrewMember];
+};
+
+export type Slug = {
+	_key: String;
+	_type: String;
+	current: String;
+	source: String;
 };
 
 export type CastMember = {
-	_key: String;
-	_type: String;
-	characterName: String;
+	_key: string;
+	_type: string;
+	characterName: string;
 	person: Person;
-	externalId: Float;
-	externalCreditId: String;
+	externalId: number;
+	externalCreditId: string;
 };
 
 export type CrewMember = {
-	_key: String;
-	_type: String;
-	department: String;
-	job: String;
+	_key: string;
+	_type: string;
+	department: string;
+	job: string;
 	person: Person;
-	externalId: Float;
-	externalCreditId: String;
+	externalId: number;
+	externalCreditId: string;
 };
 
 export type Person = Implements<
 	Document,
 	{
-		_id: ID;
-		_type: String;
-		_createdAt: DateTime;
-		_updatedAt: DateTime;
-		_rev: String;
-		_key: String;
-		name: String;
+		_id: string;
+		_type: string;
+		_createdAt: string;
+		_updatedAt: string;
+		_rev: string;
+		_key: string;
+		name: string;
 		slug: Slug;
 		image: Image;
 	}
 >;
 
 export type Image = {
-	_key: String;
-	_type: String;
+	_key: string;
+	_type: string;
 	asset: SanityImageAsset;
 	hotspot: SanityImageHotspot;
 	crop: SanityImageCrop;
@@ -65,46 +72,46 @@ export type Image = {
 export type SanityImageAsset = Implements<
 	Document,
 	{
-		_id: ID;
-		_type: String;
-		_createdAt: DateTime;
-		_updatedAt: DateTime;
-		_rev: String;
-		_key: String;
-		originalFilename: String;
-		label: String;
-		title: String;
-		description: String;
-		altText: String;
-		sha1hash: String;
-		extension: String;
-		mimeType: String;
-		size: Float;
-		assetId: String;
-		uploadId: String;
-		path: String;
-		url: String;
+		_id: string;
+		_type: string;
+		_createdAt: string;
+		_updatedAt: string;
+		_rev: string;
+		_key: string;
+		originalFilename: string;
+		label: string;
+		title: string;
+		description: string;
+		altText: string;
+		sha1hash: string;
+		extension: string;
+		mimeType: string;
+		size: number;
+		assetId: string;
+		uploadId: string;
+		path: string;
+		url: string;
 		metadata: SanityImageMetadata;
 		source: SanityAssetSourceData;
 	}
 >;
 
 export type SanityImageHotspot = {
-	_key: String;
-	_type: String;
-	x: Float;
-	y: Float;
-	height: Float;
-	width: Float;
+	_key: string;
+	_type: string;
+	x: number;
+	y: number;
+	height: number;
+	width: number;
 };
 
 export type SanityImageCrop = {
-	_key: String;
-	_type: String;
-	top: Float;
-	bottom: Float;
-	left: Float;
-	right: Float;
+	_key: string;
+	_type: string;
+	top: number;
+	bottom: number;
+	left: number;
+	right: number;
 };
 
 /**

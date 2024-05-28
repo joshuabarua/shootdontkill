@@ -5,16 +5,16 @@ import {visionTool} from '@sanity/vision';
 import {schemaTypes} from './app/sanity/schemaTypes';
 import {graphiQLTool} from 'sanity-plugin-graphiql';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID; // "6h85f463"
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET; // "production"
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''; // "6h85f463"
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || ''; // "production"
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-05-03';
 
 export default defineConfig({
 	name: 'default',
 	title: 'weshootbutdontkill',
-	projectId: '6h85f463',
-	dataset: 'production',
-	apiVersion: '2023-05-03',
+	projectId: projectId,
+	dataset: dataset,
+	apiVersion: apiVersion,
 	basePath: '/admin',
 	plugins: [
 		structureTool(),

@@ -24,6 +24,23 @@ const allMoviesQuery = groq`
 }
 `;
 
+const mostRecentMovieQuery = `
+  *[_type == "movie"] | order(releaseDate desc)[0] {
+    _id,
+    title,
+    "slug": slug.current,
+    releaseDate,
+    poster {
+      asset -> {
+        originalFilename,
+        url
+      }
+    },
+    externalId,
+    popularity
+  }
+`;
+
 export async function getMovies() {
 	const client = createClient({
 		projectId: projectId,
@@ -37,6 +54,23 @@ export async function getMovies() {
 		return movies;
 	} catch (error) {
 		console.error('Failed to fetch movies:', error);
+		throw error;
+	}
+}
+
+export async function getMostRecentMovie() {
+	const client = createClient({
+		projectId,
+		dataset,
+		apiVersion,
+		useCdn: process.env.NODE_ENV === 'production',
+	});
+
+	try {
+		const movie = await client.fetch<Movie>(mostRecentMovieQuery);
+		return movie;
+	} catch (error) {
+		console.error('Failed to fetch the most recent movie:', error);
 		throw error;
 	}
 }

@@ -4,8 +4,6 @@ import React, {FC} from 'react';
 import Image from 'next/image';
 import {format} from 'date-fns';
 import {Movie} from '../@types';
-import {getMostRecentMovie} from '../sanity/sanity-utils';
-import {GetServerSideProps} from 'next/types';
 
 interface HeroImageProps {
 	movie: Movie | null;
@@ -17,9 +15,9 @@ const HeroImage: FC<HeroImageProps> = ({movie}) => {
 	}
 
 	return (
-		<div style={{position: 'relative', width: '100vw', height: '80vh'}}>
-			{movie.poster && movie.poster.asset ? (
-				<Image src={movie.poster.asset.url} alt={movie.title} layout="fill" objectFit="contain" quality={100} />
+		<div style={{position: 'relative', width: '100vw', height: '800px'}} className="flex justify-center items-center">
+			{movie.landscapeStill && movie.landscapeStill.asset ? (
+				<Image src={movie.poster.asset.url} alt={movie.title} layout="fill" objectFit="cover" quality={100} />
 			) : (
 				<p>No poster available</p>
 			)}

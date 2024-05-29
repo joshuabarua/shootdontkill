@@ -14,6 +14,7 @@ export type Movie = {
 	overviewRaw: JSON;
 	releaseDate: string;
 	poster: Image;
+	landscapeStill: Image;
 	externalId: number;
 	popularity: number;
 	castMembers?: [CastMember];

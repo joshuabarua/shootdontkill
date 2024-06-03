@@ -1,21 +1,9 @@
 import {createClient, groq} from 'next-sanity';
-import React from 'react';
 import imageUrlBuilder from '@sanity/image-url';
-import {Movie} from '../@types';
+import {Movie, Movies} from '../@types';
+import clientConfig from './client-config';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''; // "6h85f463"
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || ''; // "production"
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-05-03';
-
-console.log(projectId, dataset, apiVersion);
-
-const client = createClient({
-	projectId: projectId,
-	dataset: dataset,
-	apiVersion: apiVersion,
-	useCdn: process.env.NODE_ENV === 'production',
-});
-
+const client = createClient(clientConfig);
 const allMoviesQuery = groq`
 *[_type == "movie"] | order(releaseDate desc) {
 	_id,
@@ -28,6 +16,12 @@ const allMoviesQuery = groq`
 			url
     	}
 	},
+	landscapeStill {
+      asset -> {
+        originalFilename,
+        url,
+      }
+    },
 	externalId,
 	popularity
 }
@@ -42,17 +36,24 @@ const mostRecentMovieQuery = `
     poster {
       asset -> {
         originalFilename,
-        url
+        url,
+      }
+    },
+    landscapeStill {
+      asset -> {
+        originalFilename,
+        url,
       }
     },
     externalId,
-    popularity
+    popularity,
   }
 `;
 
-export async function getMovies() {
+export async function getMovies(): Promise<Movies> {
 	try {
 		const movies = await client.fetch(allMoviesQuery);
+		// console.log('Movies:', movies);
 		return movies;
 	} catch (error) {
 		console.error('Failed to fetch movies:', error);
@@ -60,9 +61,11 @@ export async function getMovies() {
 	}
 }
 
-export async function getMostRecentMovie() {
+export async function getMostRecentMovie(): Promise<Movie> {
 	try {
-		const movie = await client.fetch<Movie>(mostRecentMovieQuery);
+		const movie = await client.fetch(mostRecentMovieQuery);
+		console.log('Movie:', movie);
+
 		return movie;
 	} catch (error) {
 		console.error('Failed to fetch the most recent movie:', error);
@@ -70,12 +73,8 @@ export async function getMostRecentMovie() {
 	}
 }
 
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client);
+// const builder = imageUrlBuilder(client);
 
-// Then we like to make a simple function like this that gives the
-// builder an image and returns the builder for you to specify additional
-// parameters:
-export function urlFor(source: string | undefined | null | {asset: {url: string}}) {
-	return builder.image(source);
-}
+// export function urlFor(source: string | undefined | null | {asset: {url: string}}) {
+// 	return builder.image(source);
+// }

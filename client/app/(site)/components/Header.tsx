@@ -28,6 +28,7 @@ const Header: React.FC = () => {
 		};
 	}, []);
 
+
 	return (
 		<header ref={headerRef} className="fixed top-0 left-0 w-full z-50 bg-white opacity-90 shadow-md">
 			<div className="flex items-center justify-between p-4">

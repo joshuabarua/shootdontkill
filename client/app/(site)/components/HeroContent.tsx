@@ -23,7 +23,7 @@ const HeroImage: FC<HeroImageProps> = ({movie}) => {
 			) : (
 				<p>No poster available</p>
 			)}
-			<div style={{position: 'absolute', bottom: '20px', left: '20px', color: 'white'}}>
+			<div style={{position: 'absolute', top: '20px', left: '20px', color: 'white'}}>
 				<h1>{movie.title}</h1>
 				<p>Release Date: {format(new Date(movie.releaseDate), 'dd.MM.yyyy')}</p>
 			</div>

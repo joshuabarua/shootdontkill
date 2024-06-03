@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Movie, Movies} from '../../@types';
 import Image from 'next/image';
+import gsap from 'gsap';
 
 interface HomeContentProps {
 	movies: Movies;
@@ -15,20 +16,21 @@ const HomeMoviesContent: FC<HomeContentProps> = ({movies}) => {
 		return `${day}.${month}.${year}`;
 	};
 
+	gsap;
 	// console.log('Moviessss', movies);
 	return (
-		<div className="w-full h-full pt-20 flex justify-center items-center flex-col gap-6">
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 w-full">
+		<div className="w-full h-full mt-[-10vh] flex justify-center items-center flex-col gap-6">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
 				{movies.map((movie: Movie, idx) => (
 					<>
-						<div key={idx} className="flex flex-col relative">
-							<div className="group hover:scale-[1.2]  ease-in-out duration-700 rounded-sm">
-								<Image src={movie.poster.asset.url} alt={movie.title} layout="responsive" width={400} height={600} className="rounded-sm" />
+						<div key={idx} className="image-container group ">
+							<div className="relative overflow-hidden rounded-sm transition-transform duration-500 ease-in-out transform-gpu group-hover:scale-125">
+								<Image src={movie.poster.asset.url} alt={movie.title} layout="responsive" width={400} height={600} className="rounded-sm " />
 								{
 									//TODO: Decide if i wanna keep this hover to display movie names, will be  changed to the title image in future with GSAP
 								}
-								<div className="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 ease-in-out flex items-start justify-center transition-opacity duration-700">
-									<h2 className="text-white text-lg font-bold">{movie.title}</h2>
+								<div className="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 ease-in-out flex items-start justify-center transition-opacity duration-500">
+									{/* <h2 className="text-white text-lg font-bold">{movie.title}</h2> */}
 								</div>
 							</div>
 						</div>

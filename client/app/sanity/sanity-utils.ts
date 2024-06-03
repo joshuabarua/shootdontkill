@@ -1,4 +1,4 @@
-import {createClient, groq} from 'next-sanity';
+import {QueryParams, createClient, groq} from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 import {Movie, Movies} from '../@types';
 import clientConfig from './client-config';
@@ -28,27 +28,34 @@ const allMoviesQuery = groq`
 `;
 
 const mostRecentMovieQuery = `
-  *[_type == "movie"] | order(releaseDate desc)[0] {
-    _id,
-    title,
-    "slug": slug.current,
-    releaseDate,
-    poster {
-      asset -> {
-        originalFilename,
-        url,
-      }
-    },
-    landscapeStill {
-      asset -> {
-        originalFilename,
-        url,
-      }
-    },
-    externalId,
-    popularity,
-  }
+*[_type == "movie"] | order(releaseDate desc)[0] {
+  _id,
+  title,
+  "slug": slug.current,
+  releaseDate,
+  poster {
+    asset -> {
+      originalFilename,
+      url
+    }
+  },
+  landscapeStill {
+    asset -> {
+      originalFilename,
+      url
+    }
+  },
+  externalId,
+  popularity
+}
 `;
+
+export async function sanityFetch<QueryResponse>({query, qParams = {}, tags}: {query: string; qParams?: QueryParams; tags: string[]}): Promise<QueryResponse> {
+	return client.fetch<QueryResponse>(query, qParams, {
+		cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache',
+		next: {tags},
+	});
+}
 
 export async function getMovies(): Promise<Movies> {
 	try {
@@ -64,7 +71,7 @@ export async function getMovies(): Promise<Movies> {
 export async function getMostRecentMovie(): Promise<Movie> {
 	try {
 		const movie = await client.fetch(mostRecentMovieQuery);
-		console.log('Movie:', movie);
+		// console.log('Movie:', movie);
 
 		return movie;
 	} catch (error) {

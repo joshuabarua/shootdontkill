@@ -6,8 +6,7 @@ const config = {
 	projectId: projectId,
 	dataset: dataset,
 	apiVersion: apiVersion,
-	useCdn: process.env.NODE_ENV === 'production',
+	useCdn: process.env.NODE_ENV === 'development' ? true : false,
 };
 
 export default config;
-

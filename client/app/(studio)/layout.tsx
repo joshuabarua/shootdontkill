@@ -13,5 +13,14 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <html lang="en">{children}</html>;
+	return (
+		<html lang="en">
+			<head>
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+				<link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
+			</head>
+			{children}
+		</html>
+	);
 }

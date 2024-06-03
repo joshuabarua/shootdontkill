@@ -17,7 +17,7 @@ const HeroImage: FC<HeroImageProps> = ({movie}) => {
 	// console.log('Movieeee', movie);
 
 	return (
-		<div style={{position: 'relative', width: '100vw', height: '800px'}} className="flex justify-center items-center">
+		<div style={{position: 'relative', width: '100vw', height: '90vh'}} className="flex justify-center items-center">
 			{movie.landscapeStill && movie.landscapeStill.asset ? (
 				<Image src={movie.landscapeStill.asset.url} alt={movie.title} layout="fill" objectFit="cover" quality={100} />
 			) : (

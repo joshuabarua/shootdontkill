@@ -15,7 +15,7 @@ export default defineConfig({
 	projectId: projectId,
 	dataset: dataset,
 	apiVersion: apiVersion,
-	useCdn: false,
+	useCdn: true,
 	basePath: '/admin',
 	plugins: [
 		structureTool(),

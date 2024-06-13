@@ -13,15 +13,15 @@ const Footer = () => {
 					</h1>
 				</div>
 				<div className="flex flex-col">
-					<div className="text-xl pt-4">
+					<h1 className="text-xl pt-4">
 						<strong>CONTACT</strong>
-					</div>
-					<div className="text-sm pt-4">piewpiew@weshootbutdontkill.com</div>
+					</h1>
+					<p className="text-sm pt-4">piewpiew@weshootbutdontkill.com</p>
 				</div>
 				<div className="flex flex-col">
-					<div className="text-xl pt-4">
+					<h1 className="text-xl pt-4">
 						<strong>FOLGEN</strong>
-					</div>
+					</h1>
 					<div className="pt-4">
 						<div className="flex gap-4">
 							<FaInstagram className="w-6 h-6" />
@@ -31,10 +31,10 @@ const Footer = () => {
 				</div>
 			</div>
 			<div className="flex items-center space-between gap-4 w-full px-12">
-				<div className="text-sm mt-4 w-1/2">© WE SHOOT BUT DONT KILL! {currentYear}</div>
-				<div className="text-sm mt-4 w-1/2 text-right">
+				<p className="text-sm mt-4 w-1/2">© WE SHOOT BUT DONT KILL! {currentYear}</p>
+				<p className="text-sm mt-4 w-1/2 text-right">
 					<a href="https://weshootbutdontkill.com/datenschutzerklaerung/">IMPRINT</a>
-				</div>
+				</p>
 			</div>
 		</footer>
 	);

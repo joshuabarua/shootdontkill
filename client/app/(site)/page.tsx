@@ -8,7 +8,7 @@ export default async function Home() {
 	const recentMovie: Movie = await getMostRecentMovie();
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24 pt-0">
+		<main className="flex min-w-screen min-h-screen flex-col items-center justify-between mx-12">
 			<HeroContent movie={recentMovie} />
 			<HomeMoviesContent movies={movies} />
 		</main>

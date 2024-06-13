@@ -9,10 +9,18 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'NewSpirit-MediumCondensed';
+	src: url('/fonts/NewSpirit-MediumCondensed.ttf') format('truetype');
+	font-weight: normal;
+	font-style: condensed;
+}
+
 :root {
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255;
+	--red-heading: rgb(209, 63, 63);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -25,7 +33,19 @@
 
 body {
 	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+	background: white;
+	h1,
+	h2 {
+		font-family: 'NewSpirit-MediumCondensed';
+	}
+
+	p {
+		font-family: 'IBM-PlexMono';
+	}
+
+	h2 {
+		color: var(--red-heading);
+	}
 }
 
 @layer utilities {
